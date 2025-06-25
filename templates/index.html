@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>答え表示</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+        .answer {
+            font-size: 6em;
+            font-weight: bold;
+            color: #222;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="answer" id="answer">{{ answer }}</div>
+    <script>
+        setInterval(function() {
+            fetch(window.location.pathname + "api/answer")
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("answer").textContent = data.answer;
+                });
+        }, 50); // 0.05秒ごとに更新
+    </script>
+</body>
+</html>
